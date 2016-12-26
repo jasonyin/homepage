@@ -1,0 +1,8 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "editor.renderIndentGuides": true,
+  "editor.tabSize": 2,
+  "licenser.author": "Jason Yin <jasonyin@outlook.com>",
+  "licenser.projectName": "homepage",
+  "licenser.license": "MIT"
+}
