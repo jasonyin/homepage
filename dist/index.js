@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+
 //    Copyright 2016 Jason Yin <jasonyin@outlook.com>
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +16,23 @@
 //    limitations under the License.
 
 'use strict';
-import express from 'express';
 
-const app = express();
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+console.log("test1");
+var app = (0, _express2.default)();
+console.log("test2");
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage')
+  console.log("test3");
+  res.send('GET request to the homepage');
 });
-
+console.log("test4");
 app.listen(8080);
+console.log("test5");
 /*
 // Matches paths like `/`, `/index.html`, `/about/` or `/about/index.html`.
 const toplevelSection = /([^/]*)(\/|\/index.html)$/;
