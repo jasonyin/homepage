@@ -19,10 +19,21 @@ import express from 'express';
 
 const app = express();
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage')
+  res.send('GET request to the homepage');
 });
 
-app.listen(8080);
+app.get('\/about\/?', function (req, res) {
+  res.send('GET request to the about');
+});
+
+app.get('\/contact\/?', function (req, res) {
+  res.send('GET request to the contact');
+});
+
+const port = 8080;
+app.listen(port, () => {
+  console.log(`license at port ${port}`);
+});
 /*
 // Matches paths like `/`, `/index.html`, `/about/` or `/about/index.html`.
 const toplevelSection = /([^/]*)(\/|\/index.html)$/;
