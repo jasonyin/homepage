@@ -16,10 +16,27 @@
 
 'use strict';
 import express from 'express';
+import { readFileSync } from 'fs';
 
 const app = express();
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
+  // Extract the menu item name from the path and attach it to
+  // the request to have it available for template rendering.
+  req.item = req.params[0] == undefined ? 'home' : req.params[0];
+
+  // If the request has `?partial`, don't render header and footer.
+  let files;
+  if ('partial' in req.query) {
+    files = [readFileSync(`app/${req.item}/index.html`)];
+  } else {
+    files = [
+      readFileSync('app/header.partial.html'),
+      readFileSync(`app/${req.item}/index.html`),
+      readFileSync('app/footer.partial.html')
+    ];
+  }
+
+  res.send(files.join(''));
 });
 
 app.get('\/about\/?', function (req, res) {
