@@ -16,36 +16,58 @@
 
 'use strict';
 import express from 'express';
-import { readFileSync } from 'fs';
+import { createHash } from 'crypto';
+import { readFile } from 'mz/fs';
 
 const app = express();
-app.get('/', function (req, res) {
+
+// Matches paths like `/`, `/index.html`, `/about/` or `/about/index.html`.
+const toplevelSection = /([^/]*)(\/|\/index.html)$/;
+app.get(toplevelSection, function (req, res) {
   // Extract the menu item name from the path and attach it to
   // the request to have it available for template rendering.
-  req.item = req.params[0] == undefined ? 'home' : req.params[0];
+  req.item = req.params[0];
 
   // If the request has `?partial`, don't render header and footer.
   let files;
   if ('partial' in req.query) {
-    files = [readFileSync(`app/${req.item}/index.html`)];
+    files = [readFile(`app/${req.item}/index.html`)];
   } else {
     files = [
-      readFileSync('app/header.partial.html'),
-      readFileSync(`app/${req.item}/index.html`),
-      readFileSync('app/footer.partial.html')
+      readFile('app/header.partial.html'),
+      readFile(`app/${req.item}/index.html`),
+      readFile('app/footer.partial.html')
     ];
   }
 
-  res.send(files.join(''));
+  Promise.all(files)
+    .then(files => files.map(f => f.toString('utf-8')))
+    .then(files => {
+      const content = files.join('');
+      // Let's use sha256 as a means to get an ETag
+      const hash = createHash('sha256')
+                    .update(content)
+                    .digest('hex');
+
+      // set the etag for caching
+      res.set({
+        'ETag': hash,
+        'Cache-Control': 'public, no-cache'
+      });
+
+      // set response back
+      res.status(200).send(content);
+    })
+    .catch(error => res.status(500).send(error.toString()));
 });
 
-app.get('\/about\/?', function (req, res) {
+/*app.get('\/about\/?', function (req, res) {
   res.send('GET request to the about');
 });
 
 app.get('\/contact\/?', function (req, res) {
   res.send('GET request to the contact');
-});
+});*/
 
 const port = 8080;
 app.listen(port, () => {

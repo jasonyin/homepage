@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node app/index.js",
-    "prestart": "babel app --out-dir dist",
+    "prestart": "babel app --out-dir dist --require babel-polyfill",
     "start": "node dist/index.js"
   },
   "repository": {
@@ -23,14 +23,17 @@
   },
   "homepage": "https://github.com/jasonyin/homepage#readme",
   "dependencies": {
+    "babel-polyfill": "^6.20.0",
     "express": "^4.14.0",
     "handlebars": "^4.0.6",
     "http2": "^3.3.6",
+    "mz": "^2.6.0",
     "spdy": "^3.4.4"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-3": "^6.17.0",
     "nodemon": "^1.11.0"
   }
 }
