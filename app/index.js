@@ -18,6 +18,7 @@
 import express from 'express';
 import { createHash } from 'crypto';
 import { readFile } from 'mz/fs';
+import { compile } from 'handlebars';
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.get(toplevelSection, function (req, res) {
 
   Promise.all(files)
     .then(files => files.map(f => f.toString('utf-8')))
+    .then(files => files.map(f => compile(f)(req)))
     .then(files => {
       const content = files.join('');
       // Let's use sha256 as a means to get an ETag
@@ -61,34 +63,9 @@ app.get(toplevelSection, function (req, res) {
     .catch(error => res.status(500).send(error.toString()));
 });
 
-/*app.get('\/about\/?', function (req, res) {
-  res.send('GET request to the about');
-});
-
-app.get('\/contact\/?', function (req, res) {
-  res.send('GET request to the contact');
-});*/
+app.use('/statics', express.static('app/statics'));
 
 const port = 8080;
 app.listen(port, () => {
   console.log(`license at port ${port}`);
 });
-/*
-// Matches paths like `/`, `/index.html`, `/about/` or `/about/index.html`.
-const toplevelSection = /([^/]*)(\/|\/index.html)$/;
-app.get(toplevelSection, (req, res) => {
-  const content = files.join('');
-    // Let's use sha256 as a means to get an ETag
-    const hash = crypto
-                  .createHash('sha256')
-                  .update(content)
-                  .digest('hex');
-
-    res.set({
-      'ETag': hash,
-      'Cache-Control': 'public, no-cache'
-    });
-    res.send(content);
-});
-
-app.use(express.static('app'));*/
