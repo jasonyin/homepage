@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node app/index.js",
-    "prestart": "babel app --out-dir dist --require babel-polyfill",
-    "start": "node dist/index.js"
+    "prestart": "babel app --out-dir app/dist --require babel-polyfill",
+    "start": "node app/dist/index.js"
   },
   "repository": {
     "type": "git",

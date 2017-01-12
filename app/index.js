@@ -25,14 +25,16 @@ var path = require('path');
 const app = express();
 app.use(
   sassMiddleware({
-    src: __dirname + '/sass',
-    dest: path.resolve(__dirname, '../dist'),
-    debug: true // obvious
+    src: __dirname + '/miscs/sass',
+    dest: path.join(__dirname + '/dist/css'),
+    debug: true, // obvious
+    force: true,
+    prefix: '/styles'
   })
 );
 
-app.use('/public', express.static(path.resolve(__dirname, '../dist')));
-app.use('/statics', express.static('app/statics'));
+app.use('/statics', express.static('app/miscs/statics'));
+app.use('/scripts', express.static(path.join(__dirname + '/miscs/js')));
 
 // Matches paths like `/`, `/index.html`, `/about/` or `/about/index.html`.
 const toplevelSection = /([^/]*)(\/|\/index.html)$/;
