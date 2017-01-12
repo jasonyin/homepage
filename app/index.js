@@ -19,8 +19,20 @@ import express from 'express';
 import { createHash } from 'crypto';
 import { readFile } from 'mz/fs';
 import { compile } from 'handlebars';
+var sassMiddleware = require('node-sass-middleware');
+var path = require('path');
 
 const app = express();
+app.use(
+  sassMiddleware({
+    src: __dirname + '/sass',
+    dest: path.resolve(__dirname, '../dist'),
+    debug: true // obvious
+  })
+);
+
+app.use('/public', express.static(path.resolve(__dirname, '../dist')));
+app.use('/statics', express.static('app/statics'));
 
 // Matches paths like `/`, `/index.html`, `/about/` or `/about/index.html`.
 const toplevelSection = /([^/]*)(\/|\/index.html)$/;
@@ -62,8 +74,6 @@ app.get(toplevelSection, function (req, res) {
     })
     .catch(error => res.status(500).send(error.toString()));
 });
-
-app.use('/statics', express.static('app/statics'));
 
 const port = 8080;
 app.listen(port, () => {
