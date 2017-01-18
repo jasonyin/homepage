@@ -1,0 +1,40 @@
+//    Copyright 2017 Jason Yin <jasonyin@outlook.com>
+// 
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+@import "./variables";
+
+@mixin jy-typography-base {
+  font-family: $jy-typography-font-family;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin jy-typography($style) {
+  $style-props: map-get($jy-typography-styles, $style);
+
+  @if not map-has-key($jy-typography-styles, $style) {
+    @error "Invalid style specified! Choose one of #{map-keys($jy-typography-styles)}";
+  }
+
+  @include jy-typography-base;
+
+  font-size: map-get($style-props, font-size);
+  font-weight: #{map-get($style-props, font-weight)};
+  letter-spacing: map-get($style-props, letter-spacing);
+  line-height: map-get($style-props, line-height);
+}
+
+@mixin jy-typography-adjust-margin($style) {
+  margin: map-get(map-get($jy-typography-styles, $style), margin);
+}
