@@ -23,15 +23,16 @@ import swPrecache from 'sw-precache';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import {output as pagespeed} from 'psi';
 import pkg from './package.json';
-
-var concat = require('gulp-concat');
+var browserify = require('gulp-browserify');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
+let scriptPaths = ['app/scripts/**/*.js', 'app/uiComponents/**/*.js'];
+
 // Lint JavaScript
 gulp.task('lint', () =>
-  gulp.src(['app/scripts/**/*.js','!node_modules/**'])
+  gulp.src(scriptPaths.concat('!node_modules/**'))
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
@@ -87,7 +88,7 @@ gulp.task('styles', () => {
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.if('*.css', $.cssnano()))
     .pipe($.size({title: 'styles'}))
-    .pipe(concat('main.css'))
+    .pipe($.concat('main.css'))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(gulp.dest('dist/styles'));
@@ -95,11 +96,8 @@ gulp.task('styles', () => {
 
 // Concatenate and minify JavaScript. Transpiles ES2015 code to ES5.
 gulp.task('scripts', () =>
-    gulp.src([
-      './app/scripts/main.js'
-      // Other scripts
-    ])
-      .pipe($.newer('.tmp/scripts'))
+    gulp.src(scriptPaths)
+      .pipe($.newer('.tmp/tmpScripts'))
       .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.sourcemaps.write())
@@ -109,6 +107,7 @@ gulp.task('scripts', () =>
       // Output files
       .pipe($.size({title: 'scripts'}))
       .pipe($.sourcemaps.write('.'))
+      .pipe(browserify())
       .pipe(gulp.dest('dist/scripts'))
       .pipe(gulp.dest('.tmp/scripts'))
 );
@@ -159,7 +158,7 @@ gulp.task('serve', ['scripts', 'styles'], () => {
 
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts', reload]);
+  gulp.watch(scriptPaths, ['lint', 'scripts', reload]);
   gulp.watch(['app/images/**/*'], reload);
 });
 
@@ -227,6 +226,7 @@ gulp.task('generate-service-worker', ['copy-sw-scripts'], () => {
       // Add/remove glob patterns to match your directory setup.
       `${rootDir}/images/**/*`,
       `${rootDir}/scripts/**/*.js`,
+      `${rootDir}/uiComponents/**/*.js`,
       `${rootDir}/styles/**/*.css`,
       `${rootDir}/*.{html,json}`
     ],
