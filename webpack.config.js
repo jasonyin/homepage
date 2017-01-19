@@ -36,15 +36,17 @@ const createBannerPlugin = () => new webpack.BannerPlugin([
   entryOnly: true,
 });
 
-module.exports = [{
+module.exports = [
+{
   name: 'jy-homepage',
   entry: {
-    main: [path.resolve('./app/scripts/**/*.js')]
+    main: [
+      path.resolve('./app/templates/home/home.js')],
   },
   output: {
     path: OUT_PATH,
     publicPath: PUBLIC_PATH,
-    filename: 'jy.[name].' + (IS_PROD ? 'min.' : '') + 'js',
+    filename: 'jy-[name].' + (IS_PROD ? 'min.' : '') + 'js',
     libraryTarget: 'umd',
     library: ['jy', '[name]'],
   },
@@ -57,6 +59,9 @@ module.exports = [{
     }, {
       test: /\.json$/,
       loader: 'json-loader',
+    }, {
+      test: /\.hbs$/,
+      loader: 'handlebars-loader',
     }],
   },
   plugins: [
@@ -92,28 +97,7 @@ module.exports = [{
     createBannerPlugin(),
   ],
 }, {
-  name: 'script-ui-components-all',
-  entry: path.resolve('./app/ui-components/all/index.js'),
-  output: {
-    path: OUT_PATH,
-    publicPath: PUBLIC_PATH,
-    filename: 'jy-all-script-ui-components.' + (IS_PROD ? 'min.' : '') + 'js',
-    libraryTarget: 'umd',
-    library: 'jy',
-  },
-  devtool: IS_DEV ? 'source-map' : null,
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-    }],
-  },
-  plugins: [
-    createBannerPlugin(),
-  ],
-}, {
-  name: 'css',
+  name: 'style-ui-components',
   entry: {
     'jy-all-style-ui-components': path.resolve('./app/ui-components/all/style.scss'),
     'jy.animation': path.resolve('./app/ui-components/animation/animation.scss'),
@@ -152,4 +136,25 @@ module.exports = [{
       require('autoprefixer'),
     ];
   },
+}, {
+  name: 'script-ui-components-all',
+  entry: path.resolve('./app/ui-components/all/index.js'),
+  output: {
+    path: OUT_PATH,
+    publicPath: PUBLIC_PATH,
+    filename: 'jy-all-script-ui-components.' + (IS_PROD ? 'min.' : '') + 'js',
+    libraryTarget: 'umd',
+    library: 'jy',
+  },
+  devtool: IS_DEV ? 'source-map' : null,
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+    }],
+  },
+  plugins: [
+    createBannerPlugin(),
+  ],
 }];
