@@ -9,7 +9,7 @@
     "build:min": "mkdirp build && cross-env JY_ENV=production webpack -p --progress --colors",
     "clean": "del-cli build/**",
     "dist": "npm run clean && npm run build && npm run build:min",
-    "dev": "npm run clean && cross-env JY_ENV=development webpack-dev-server --content-base app --inline --quiet --hot --host localhost",
+    "dev": "npm run clean && cross-env JY_ENV=development webpack-dev-server -d --content-base app --inline --quiet --hot --host localhost",
     "fix:js": "eslint --fix packages test webpack.config.js",
     "fix:css": "stylefmt -R packages",
     "fix": "npm-run-all --parallel fix:*",
