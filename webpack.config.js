@@ -21,7 +21,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const OUT_PATH = path.resolve('./build');
 // Used with webpack-dev-server
-const PUBLIC_PATH = '/statics/';
+const PUBLIC_PATH = '/build/';
 const IS_DEV = process.env.jy_ENV === 'development';
 const IS_PROD = process.env.jy_ENV === 'production';
 
