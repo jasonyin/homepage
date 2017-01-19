@@ -39,7 +39,10 @@ const createBannerPlugin = () => new webpack.BannerPlugin([
 module.exports = [{
   name: 'jy-homepage',
   entry: {
-    main: [path.resolve('./app/scripts/**/*.js')]
+    main: [
+      path.resolve('./app/scripts/test.js'),
+      path.resolve('./app/ui-components/all/index.js')
+    ],
   },
   output: {
     path: OUT_PATH,
@@ -61,8 +64,41 @@ module.exports = [{
   },
   plugins: [
     createBannerPlugin(),
+    /*new webpack.optimize.CommonsChunkPlugin({}),*/
   ],
 }, {
+  name: 'style-ui-components-all',
+  entry: path.resolve('./app/ui-components/all/style.scss'),
+  output: {
+    path: OUT_PATH,
+    publicPath: PUBLIC_PATH,
+    // In development, these are emitted as js files to facilitate hot module replacement. In
+    // all other cases, ExtractTextPlugin is used to generate the final css, so this is given a
+    // dummy ".css-entry" extension.
+    filename: 'jy-all-style-ui-components.' + (IS_PROD ? 'min.' : '') + 'css' + (IS_DEV ? '.js' : '-entry'),
+  },
+  devtool: IS_DEV ? 'source-map' : null,
+  module: {
+    loaders: [{
+      test: /\.scss$/,
+      loader: IS_DEV ?
+          'style!css?sourceMap!postcss!sass?sourceMap' :
+          ExtractTextPlugin.extract('css!postcss!sass'),
+    }],
+  },
+  sassLoader: {
+    includePaths: glob.sync('./node_modules').map((d) => path.join(__dirname, d)),
+  },
+  plugins: [
+    new ExtractTextPlugin('jy-all-style-ui-components.' + (IS_PROD ? 'min.' : '') + 'css'),
+    createBannerPlugin(),
+  ],
+  postcss: function() {
+    return [
+      require('autoprefixer'),
+    ];
+  },
+}, /*{
   name: 'script-ui-components',
   entry: {
     animation: [path.resolve('./app/ui-components/animation/index.js')],
@@ -90,29 +126,8 @@ module.exports = [{
   },
   plugins: [
     createBannerPlugin(),
-  ],
-}, {
-  name: 'script-ui-components-all',
-  entry: path.resolve('./app/ui-components/all/index.js'),
-  output: {
-    path: OUT_PATH,
-    publicPath: PUBLIC_PATH,
-    filename: 'jy-all-script-ui-components.' + (IS_PROD ? 'min.' : '') + 'js',
-    libraryTarget: 'umd',
-    library: 'jy',
-  },
-  devtool: IS_DEV ? 'source-map' : null,
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-    }],
-  },
-  plugins: [
-    createBannerPlugin(),
-  ],
-}, {
+],
+},{
   name: 'css',
   entry: {
     'jy-all-style-ui-components': path.resolve('./app/ui-components/all/style.scss'),
@@ -141,7 +156,7 @@ module.exports = [{
     }],
   },
   sassLoader: {
-    includePaths: glob.sync('packages/*/node_modules').map((d) => path.join(__dirname, d)),
+    includePaths: glob.sync('node_modules').map((d) => path.join(__dirname, d)),
   },
   plugins: [
     new ExtractTextPlugin('[name].' + (IS_PROD ? 'min.' : '') + 'css'),
@@ -152,4 +167,4 @@ module.exports = [{
       require('autoprefixer'),
     ];
   },
-}];
+}*/];
