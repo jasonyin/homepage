@@ -36,20 +36,21 @@ const createBannerPlugin = () => new webpack.BannerPlugin([
   entryOnly: true,
 });
 
-module.exports = [{
+module.exports = [
+{
   name: 'jy-homepage',
   entry: {
     main: [
-      path.resolve('./app/scripts/test.js'),
+      path.resolve('./app/scripts/home.js'),
       path.resolve('./app/ui-components/all/index.js')
     ],
   },
   output: {
     path: OUT_PATH,
     publicPath: PUBLIC_PATH,
-    filename: 'jy.[name].' + (IS_PROD ? 'min.' : '') + 'js',
+    filename: 'jy.main.' + (IS_PROD ? 'min.' : '') + 'js',
     libraryTarget: 'umd',
-    library: ['jy', '[name]'],
+    library: ['jy', 'main'],
   },
   devtool: IS_DEV ? 'source-map' : null,
   module: {
@@ -60,6 +61,9 @@ module.exports = [{
     }, {
       test: /\.json$/,
       loader: 'json-loader',
+    }, {
+      test: /\.hbs$/,
+      loader: 'handlebars-loader',
     }],
   },
   plugins: [
@@ -90,7 +94,7 @@ module.exports = [{
     includePaths: glob.sync('./node_modules').map((d) => path.join(__dirname, d)),
   },
   plugins: [
-    new ExtractTextPlugin('jy-all-style-ui-components.' + (IS_PROD ? 'min.' : '') + 'css'),
+    new ExtractTextPlugin('jy.main.' + (IS_PROD ? 'min.' : '') + 'css'),
     createBannerPlugin(),
   ],
   postcss: function() {
@@ -129,6 +133,8 @@ module.exports = [{
 ],
 },{
   name: 'css',
+}, {
+  name: 'style-ui-components',
   entry: {
     'jy-all-style-ui-components': path.resolve('./app/ui-components/all/style.scss'),
     'jy.animation': path.resolve('./app/ui-components/animation/animation.scss'),
