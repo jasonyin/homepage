@@ -18,9 +18,10 @@ const path = require('path');
 const glob = require('glob');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Used with webpack-dev-server
-const PUBLIC_PATH = '/build/';
+const PUBLIC_PATH = '';
 const IS_DEV = process.env.jy_ENV === 'development';
 const IS_PROD = process.env.jy_ENV === 'production';
 
@@ -42,14 +43,14 @@ module.exports = [
   name: 'jy-homepage',
   entry: {
     main: [
-      path.resolve('./app/scripts/home.js'),
+      path.resolve('./app/scripts/main.js'),
       path.resolve('./app/ui-components/all/index.js')
     ],
   },
   output: {
     path: OUT_PATH,
     publicPath: PUBLIC_PATH,
-    filename: 'jy.main.' + (IS_PROD ? 'min.' : '') + 'js',
+    filename: 'jy.main.js',
     libraryTarget: 'umd',
     library: ['jy', 'main'],
   },
@@ -65,37 +66,53 @@ module.exports = [
     }, {
       test: /\.hbs$/,
       loader: 'handlebars-loader',
+      query: {
+        partialDirs: [
+          path.resolve('app/templates/partials')
+        ]
+      }
     }],
   },
   plugins: [
     createBannerPlugin(),
     /*new webpack.optimize.CommonsChunkPlugin({}),*/
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      inject: false,
+      template: 'app/templates/pages/home.hbs',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'about.html',
+      inject: false,
+      template: 'app/templates/pages/about.hbs',
+    }),
   ],
 }, {
   name: 'style-ui-components-all',
-  entry: path.resolve('./app/ui-components/all/style.scss'),
+  entry: [
+    path.resolve('./app/ui-components/all/style.scss'),
+    path.resolve('./app/styles/master.scss')],
   output: {
     path: OUT_PATH,
     publicPath: PUBLIC_PATH,
     // In development, these are emitted as js files to facilitate hot module replacement. In
     // all other cases, ExtractTextPlugin is used to generate the final css, so this is given a
     // dummy ".css-entry" extension.
-    filename: 'jy.main.' + (IS_PROD ? 'min.' : '') + 'css' + (IS_DEV ? '.js' : '-entry'),
+    filename: 'jy.main.css' + (IS_DEV ? '.js' : '-entry'),
   },
   devtool: IS_DEV ? 'source-map' : null,
   module: {
     loaders: [{
       test: /\.scss$/,
-      loader: IS_DEV ?
-          'style!css?sourceMap!postcss!sass?sourceMap' :
+      loader: 
           ExtractTextPlugin.extract('css!postcss!sass'),
     }],
   },
   sassLoader: {
-    includePaths: glob.sync('./node_modules').map((d) => path.join(__dirname, d)),
+    includePaths: glob.sync('packages/*//node_modules').map((d) => path.join(__dirname, d)),
   },
   plugins: [
-    new ExtractTextPlugin('jy.main.' + (IS_PROD ? 'min.' : '') + 'css'),
+    new ExtractTextPlugin('jy.main.css'),
     createBannerPlugin(),
   ],
   postcss: function() {
