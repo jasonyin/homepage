@@ -47,12 +47,71 @@
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#2F3BA2">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="public/jy.main.min.css">
+    <style>
+      .jy-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      /* A quick and simple toolbar, while we're waiting for jy-toolbar. */
+      .jy-toolbar {
+        width: 100%;
+        height: 56px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 16px;
+        box-sizing: border-box;
+      }
+      @media (min-width: 600px) {
+        .jy-toolbar {
+          height: 64px;
+        }
+      }
+
+      /* A simple menu button. */
+      .jy-menu {
+        background: none;
+        border: none;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        margin: 0;
+        color: #FFF;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
-  <body class="jy-typography">
-    <button class="jy-button jy-button--raised">
-      Default
-    </button>
+  <body class="jy-typography jy-body">
+    <div class="jy-toolbar jy-theme--primary-bg jy-theme--text-primary-on-primary jy-typography--title jy-elevation--z4">
+      <button class="jy-menu material-icons">menu</button>
+    </div>
+    <aside class="jy-temporary-drawer jy-typography">
+      <nav class="jy-temporary-drawer__drawer">
+        <header class="jy-temporary-drawer__header">
+          <div class="jy-temporary-drawer__header-content jy-theme--primary-bg jy-theme--text-primary-on-primary">
+            Header here
+          </div>
+        </header>
+        <nav class="jy-temporary-drawer__content jy-list-group">
+          <div class="jy-list">
+            <a class="jy-list-item jy-temporary-drawer--selected" href="#">
+              <i class="material-icons jy-list-item__start-detail" aria-hidden="true">inbox</i>Inbox
+            </a>
+            <a class="jy-list-item" href="#">
+              <i class="material-icons jy-list-item__start-detail" aria-hidden="true">star</i>Star
+            </a>
+          </div>
+        </nav>
+      </nav>
+    </aside>
     <script src="public/jy.main.min.js"></script>
+    <script>
+      let drawer = new jy.main.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
+      document.querySelector('.jy-menu').addEventListener('click', () => drawer.open = true);
+    </script>
   </body>
 </html>

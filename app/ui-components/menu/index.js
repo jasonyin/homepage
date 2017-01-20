@@ -12,19 +12,4 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import * as base from '../base';
-import * as drawer from '../drawer';
-import * as menu from '../menu';
-import autoInit from '../auto-init';
-
-// Register all components
-autoInit.register('JYTemporaryDrawer', drawer.JYTemporaryDrawer);
-autoInit.register('JYSimpleMenu', menu.JYSimpleMenu);
-
-// Export all components.
-export {
-  base,
-  drawer,
-  menu,
-  autoInit,
-};
+export {JYSimpleMenu, JYSimpleMenuFoundation} from './simple';

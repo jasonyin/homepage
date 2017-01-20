@@ -1,0 +1,201 @@
+//    Copyright 2017 Jason Yin <jasonyin@outlook.com>
+// 
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+@import "../rtl/mixins";
+@import "../theme/mixins";
+@import "../typography/mixins";
+@import "../typography/variables";
+
+/**
+ * Sets the width and height of a detail element to the specified dimension.
+ */
+@mixin jy-list-detail-size_($size) {
+  width: $size;
+  height: $size;
+}
+
+/**
+ * Sets the width and height of the start detail element, as well as calculates the margins for
+ * the start detail element such that the text is always offset by 72px, which is defined within
+ * the spec.
+ */
+@mixin jy-list-start-detail-size_($size) {
+  $text-offset: 72px;
+  $side-padding: 16px;
+  $margin-value: $text-offset - $side-padding - $size;
+
+  @include jy-list-detail-size_($size);
+  @include jy-rtl-reflexive-box(margin, right, $margin-value, ".jy-list-item");
+}
+
+/* postcss-bem-linter: define list */
+
+.jy-list {
+  @include jy-typography(subheading2);
+  @include jy-theme-prop(color, text-primary-on-background);
+
+  @include jy-theme-dark {
+    @include jy-theme-prop(color, text-primary-on-dark);
+  }
+
+  margin: 0;
+  padding: 8px 16px 0;
+
+  /* According to the mocks and stickersheet, the line-height is adjusted to 24px for text content,
+   * same as for subheading1. */
+  line-height: map-get(map-get($jy-typography-styles, subheading1), line-height);
+  list-style-type: none;
+}
+
+.jy-list--dense {
+  padding-top: 4px;
+  font-size: .812rem;
+}
+
+/* postcss-bem-linter: end */
+
+/* postcss-bem-linter: define list-item */
+
+.jy-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 48px;
+
+  &__start-detail {
+    @include jy-list-start-detail-size_(24px);
+  }
+
+  &__end-detail {
+    @include jy-list-detail-size_(24px);
+    @include jy-rtl-reflexive-property(margin, auto, 16px, ".jy-list-item");
+  }
+
+  &__text {
+    display: inline-flex;
+    flex-direction: column;
+
+    &__secondary {
+      @include jy-typography(body1);
+      @include jy-theme-prop(color, text-secondary-on-background);
+
+      @include jy-theme-dark {
+        @include jy-theme-prop(color, text-secondary-on-dark);
+      }
+
+      /* Match the font size to the primary text when dense */
+      /* stylelint-disable plugin/selector-bem-pattern */
+      .jy-list--dense & {
+        font-size: inherit;
+      }
+      /* stylelint-enable plugin/selector-bem-pattern */
+    }
+  }
+
+  /* stylelint-disable plugin/selector-bem-pattern */
+  .jy-list--dense & {
+    height: 40px;
+
+    &__start-detail {
+      @include jy-list-start-detail-size_(20px);
+    }
+
+    &__end-detail {
+      @include jy-list-detail-size_(20px);
+    }
+  }
+
+  .jy-list--avatar-list & {
+    height: 56px;
+
+    &__start-detail {
+      @include jy-list-start-detail-size_(40px);
+
+      border-radius: 50%;
+    }
+  }
+
+  .jy-list--avatar-list.jy-list--dense .jy-list__item {
+    height: 48px;
+
+    &__start-detail {
+      @include jy-list-start-detail-size_(36px);
+    }
+  }
+
+  .jy-list--two-line & {
+    height: 72px;
+  }
+
+  .jy-list--two-line.jy-list--dense & {
+    height: 60px;
+  }
+  /* stylelint-enable plugin/selector-bem-pattern */
+}
+
+/* postcss-bem-linter: end */
+
+/* postcss-bem-linter: define list-divider */
+
+.jy-list-divider {
+  height: 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+  @include jy-theme-dark(".jy-list") {
+    border-bottom-color: rgba(255, 255, 255, .2);
+  }
+}
+
+.jy-list-divider--inset {
+  $jy-list-divider-inset-amt: /* text offset */ 72px - /* padding offset */ 16px;
+
+  @include jy-rtl-reflexive-box(margin, left, $jy-list-divider-inset-amt, ".jy-list-group");
+
+  width: calc(100% - #{$jy-list-divider-inset-amt});
+}
+
+/* postcss-bem-linter: end */
+
+/* postcss-bem-linter: define list-group */
+
+.jy-list-group {
+  padding: 0 16px;
+
+  &__subheader {
+    $jy-list-subheader-virtual-height: 3rem;
+    $jy-list-subheader-leading: map-get(map-get($jy-typography-styles, body2), line-height);
+    $jy-list-subheader-margin:
+      ($jy-list-subheader-virtual-height - $jy-list-subheader-leading) / 2;
+
+    @include jy-typography(body2);
+    @include jy-theme-prop(color, text-primary-on-background);
+
+    @include jy-theme-dark {
+      @include jy-theme-prop(color, text-primary-on-dark);
+    }
+
+    margin: $jy-list-subheader-margin 0;
+  }
+
+  /* Reset padding on jy-list since it's already accounted for by the list group. */
+  /* stylelint-disable plugin/selector-bem-pattern */
+  .jy-list {
+    padding: 0;
+  }
+  /* stylelint-enable plugin/selector-bem-pattern */
+}
+
+/* postcss-bem-linter: end */
