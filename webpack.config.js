@@ -73,7 +73,9 @@ module.exports = [
   ],
 }, {
   name: 'style-ui-components-all',
-  entry: path.resolve('./app/ui-components/all/style.scss'),
+  entry: [
+    path.resolve('./app/ui-components/all/style.scss'),
+    path.resolve('./app/styles/master.scss')],
   output: {
     path: OUT_PATH,
     publicPath: PUBLIC_PATH,
