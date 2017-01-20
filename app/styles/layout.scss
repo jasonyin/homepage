@@ -38,3 +38,47 @@
   color: #FFF;
   box-sizing: border-box;
 }
+
+.jy-c-navigation-container {
+    /* Simple hack to make the overflow happen to the left instead... */
+    direction: rtl;
+    order: 1;
+    width: 500px;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .jy-c-navigation {
+    /* ... and now make sure the content is actually LTR */
+    direction: ltr;
+    justify-content: flex-end;
+    width: 800px;
+  }
+
+  .jy-c-search-box.is-focused + .jy-c-navigation-container {
+    opacity: 0;
+    width: 100px;
+  }
+
+
+  .jy-c-navigation .jy-navigation__link {
+    display: inline-block;
+    height: 60px;
+    line-height: 68px;
+    background-color: transparent !important;
+    border-bottom: 4px solid transparent;
+  }
+
+    .jy-c-navigation .jy-navigation__link:hover {
+      border-bottom: 4px solid #8bc34a;
+    }
+
+  .jy-c-search-box {
+    order: 2;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .jy-c-more-button {
+    order: 3;
+  }
