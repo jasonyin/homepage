@@ -80,7 +80,7 @@ module.exports = [
     // In development, these are emitted as js files to facilitate hot module replacement. In
     // all other cases, ExtractTextPlugin is used to generate the final css, so this is given a
     // dummy ".css-entry" extension.
-    filename: 'jy-all-style-ui-components.' + (IS_PROD ? 'min.' : '') + 'css' + (IS_DEV ? '.js' : '-entry'),
+    filename: 'jy.main.' + (IS_PROD ? 'min.' : '') + 'css' + (IS_DEV ? '.js' : '-entry'),
   },
   devtool: IS_DEV ? 'source-map' : null,
   module: {

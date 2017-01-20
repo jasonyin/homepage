@@ -89,7 +89,8 @@
     <div class="jy-toolbar jy-theme--primary-bg jy-theme--text-primary-on-primary jy-typography--title jy-elevation--z4">
       <button class="jy-menu material-icons">menu</button>
     </div>
-    <aside class="jy-temporary-drawer jy-typography">
+
+    <aside class="jy-temporary-drawer">
       <nav class="jy-temporary-drawer__drawer">
         <header class="jy-temporary-drawer__header">
           <div class="jy-temporary-drawer__header-content jy-theme--primary-bg jy-theme--text-primary-on-primary">
@@ -97,17 +98,40 @@
           </div>
         </header>
         <nav class="jy-temporary-drawer__content jy-list-group">
-          <div class="jy-list">
+          <div id="icon-with-text-jy" class="jy-list">
             <a class="jy-list-item jy-temporary-drawer--selected" href="#">
               <i class="material-icons jy-list-item__start-detail" aria-hidden="true">inbox</i>Inbox
             </a>
             <a class="jy-list-item" href="#">
               <i class="material-icons jy-list-item__start-detail" aria-hidden="true">star</i>Star
             </a>
+            <a class="jy-list-item" href="#">
+              <i class="material-icons jy-list-item__start-detail" aria-hidden="true">send</i>Sent Mail
+            </a>
+            <a class="jy-list-item" href="#">
+              <i class="material-icons jy-list-item__start-detail" aria-hidden="true">drafts</i>Drafts
+            </a>
+          </div>
+
+          <hr class="jy-list-divider">
+
+          <div class="jy-list">
+            <a class="jy-list-item" href="#">
+              <i class="material-icons jy-list-item__start-detail" aria-hidden="true">email</i>All Mail
+            </a>
+            <a class="jy-list-item" href="#">
+              <i class="material-icons jy-list-item__start-detail" aria-hidden="true">delete</i>Trash
+            </a>
+            <a class="jy-list-item" href="#">
+              <i class="material-icons jy-list-item__start-detail" aria-hidden="true">report</i>Spam
+            </a>
           </div>
         </nav>
       </nav>
     </aside>
+    <main class="jy-main">
+      <h1 class="jy-typography--display1">TTTTTTest</h1>
+    </main>
     <script src="public/jy.main.min.js"></script>
     <script>
       let drawer = new jy.main.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
