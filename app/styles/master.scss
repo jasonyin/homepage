@@ -29,4 +29,10 @@
   box-sizing: border-box;
 }
 
+@media (min-width: 1024px) {
+  .jy-c-menu {
+    display: none;
+  }
+}
+
 @import "./layout/layout";
