@@ -3,6 +3,14 @@
     <script>
       let drawer = new jy.main.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
       document.querySelector('.jy-c-menu').addEventListener('click', () => drawer.open = true);
+
+      let drawerRoot = document.getElementById("jy-id-drawer");
+      drawerRoot.querySelector(".jy-list-item.jy-temporary-drawer--selected").classList.remove("jy-temporary-drawer--selected");
+      drawerRoot.querySelectorAll(".jy-list-item").forEach((link) => {
+        if (link.href.indexOf(window.location.pathname) != -1) {
+          link.classList.add("jy-temporary-drawer--selected");
+        }
+      });
     </script>
   </body>
 </html>

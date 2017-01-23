@@ -68,7 +68,8 @@ module.exports = [
       loader: 'handlebars-loader',
       query: {
         partialDirs: [
-          path.resolve('app/templates/partials')
+          path.resolve('app/templates/partials/'),
+          path.resolve('app/templates/partials/head/')
         ]
       }
     }],
@@ -85,6 +86,26 @@ module.exports = [
       filename: 'about.html',
       inject: false,
       template: 'app/templates/pages/about.hbs',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'blogs.html',
+      inject: false,
+      template: 'app/templates/pages/blogs.hbs',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'contact.html',
+      inject: false,
+      template: 'app/templates/pages/contact.hbs',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'webperf.html',
+      inject: false,
+      template: 'app/templates/pages/webperf.hbs',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'webdev.html',
+      inject: false,
+      template: 'app/templates/pages/webdev.hbs',
     }),
   ],
 }, {
