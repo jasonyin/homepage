@@ -63,13 +63,13 @@
     </div>
     <div class="jy-c-flex-spacer"></div>
     <div class="jy-c-navigation-container">
-      <nav class="jy-c-navigation">
+      <nav id="jy-id-head-navigation" class="jy-c-navigation">
         <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./index.html">Home</a>
-        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Blogs</a>
-        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Web</a>
-        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Performance</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./blogs.html">Blogs</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./webdev.html">Web</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./webperf.html">Performance</a>
         <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./about.html">About</a>
-        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Contact</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./contact.html">Contact</a>
       </nav>
     </div>
     <div class="jy-c-search-box">
@@ -117,16 +117,13 @@
     </aside>    <main class="jy-main">  <p>b</p>    </main>
     <script src="./jy.main.js"></script>
     <script>
-      let drawer = new jy.main.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
+      let drawer = new jy.main.ui.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
       document.querySelector('.jy-c-menu').addEventListener('click', () => drawer.open = true);
 
-      let drawerRoot = document.getElementById("jy-id-drawer");
-      drawerRoot.querySelector(".jy-list-item.jy-temporary-drawer--selected").classList.remove("jy-temporary-drawer--selected");
-      drawerRoot.querySelectorAll(".jy-list-item").forEach((link) => {
-        if (link.href.indexOf(window.location.pathname) != -1) {
-          link.classList.add("jy-temporary-drawer--selected");
-        }
-      });
+      //import highLightNavItem from "";
+      // highlight the selected nav link based on window.location
+      jy.main.nav.highLightNavItem("jy-id-drawer", ".jy-list-item.jy-temporary-drawer--selected", "jy-temporary-drawer--selected");
+      jy.main.nav.highLightNavItem("jy-id-head-navigation", ".jy-c-navigation__link__selected", "jy-c-navigation__link__selected");
     </script>
   </body>
 </html>
