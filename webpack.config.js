@@ -43,9 +43,7 @@ module.exports = [
   name: 'jy-homepage',
   entry: {
     main: [
-      path.resolve('./app/scripts/main.js'),
-      path.resolve('./app/ui-components/all/index.js')
-    ],
+      path.resolve('./app/scripts/main.js')],
   },
   output: {
     path: OUT_PATH,

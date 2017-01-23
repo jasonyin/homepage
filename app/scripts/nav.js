@@ -12,11 +12,17 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import * as nav from "./nav";
+export function highLightNavItem(containerId, selectedElementSelector, highLightCssClass) {
+  let containerElement = document.getElementById(containerId);
+  let selectedElement = containerElement.querySelector(selectedElementSelector);
 
-import * as ui from "../ui-components/all/index"
+  if (selectedElement) {
+    selectedElement.classList.remove(highLightCssClass);
+  }
 
-export {
-  nav,
-  ui
+  containerElement.querySelectorAll("a").forEach((link) => {
+    if (link.href.indexOf(window.location.pathname) != -1) {
+      link.classList.add(highLightCssClass);
+    }
+  });
 };
