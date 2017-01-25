@@ -49,12 +49,30 @@
   <div class="jy-c-flex-spacer"></div>
   <div class="jy-c-navigation-container">
     <nav id="jy-id-head-navigation" class="jy-c-navigation">
-      <a class="jy-c-navigation__link jy-theme--text-primary-on-primary jy-c-navigation__link__selected" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('home');">Home</a>
-      <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('blogs');">Blogs</a>
-      <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('web');">Web</a>
-      <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('perf');">Performance</a>
-      <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('about');">About</a>
-      <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('contact');">Contact</a>
+      <a id="jy-id-nav-head-home" 
+        class="jy-c-navigation__link jy-theme--text-primary-on-primary jy-c-navigation__link__selected" 
+        href="#" 
+        onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">Home</a>
+      <a id="jy-id-nav-head-blogs" 
+        class="jy-c-navigation__link jy-theme--text-primary-on-primary" 
+        href="#" 
+        onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">Blogs</a>
+      <a id="jy-id-nav-head-web" 
+        class="jy-c-navigation__link jy-theme--text-primary-on-primary" 
+        href="#" 
+        onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">Web</a>
+      <a id="jy-id-nav-head-perf" 
+        class="jy-c-navigation__link jy-theme--text-primary-on-primary" 
+        href="#" 
+        onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">Performance</a>
+      <a id="jy-id-nav-head-about" 
+        class="jy-c-navigation__link jy-theme--text-primary-on-primary" 
+        href="#" 
+        onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">About</a>
+      <a id="jy-id-nav-head-contact" 
+        class="jy-c-navigation__link jy-theme--text-primary-on-primary" 
+        href="#" 
+        onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">Contact</a>
     </nav>
   </div>
   <div class="jy-c-search-box">
@@ -74,16 +92,16 @@
       </header>
       <nav id="jy-id-drawer" class="jy-temporary-drawer__content jy-list-group">
         <div class="jy-list">
-          <a class="jy-list-item jy-temporary-drawer--selected" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('home');">
+          <a id="jy-id-nav-drawer-home" class="jy-list-item jy-temporary-drawer--selected" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">
             <i class="material-icons jy-list-item__start-detail" aria-hidden="true">home</i>Home
           </a>
-          <a class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('blogs');">
+          <a id="jy-id-nav-drawer-blogs" class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">
             <i class="material-icons jy-list-item__start-detail" aria-hidden="true">library_books</i>Blogs
           </a>
-          <a class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('web');">
+          <a id="jy-id-nav-drawer-web" class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">
             <i class="material-icons jy-list-item__start-detail" aria-hidden="true">language</i>Web
           </a>
-          <a class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('perf');">
+          <a id="jy-id-nav-drawer-perf" class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">
             <i class="material-icons jy-list-item__start-detail" aria-hidden="true">memory</i>Performance
           </a>
         </div>
@@ -91,10 +109,10 @@
         <hr class="jy-list-divider">
 
         <div class="jy-list">
-          <a class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('about');">
+          <a id="jy-id-nav-drawer-about" class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">
             <i class="material-icons jy-list-item__start-detail" aria-hidden="true">person</i>About
           </a>
-          <a class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick('contact');">
+          <a id="jy-id-nav-drawer-contact" class="jy-list-item" href="#" onclick="return jy.main.nav.onJyNavDrawerLinkClick(this);">
             <i class="material-icons jy-list-item__start-detail" aria-hidden="true">contacts</i>Contact
           </a>
         </div>

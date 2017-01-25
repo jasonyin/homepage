@@ -20,11 +20,11 @@ function highLightNavItem(containerId, selectedElementSelector, highLightCssClas
     selectedElement.classList.remove(highLightCssClass);
   }
 
-  containerElement.querySelectorAll("a").forEach((link) => {
-    if (link == target) {
-      link.classList.add(highLightCssClass);
-    }
-  });
+  target.classList.add(highLightCssClass);
+
+  if (drawer && drawer.open) {
+    drawer.open = !drawer.open;
+  }
 };
 
 export function onJyNavDrawerLinkClick(target) {
@@ -32,7 +32,7 @@ export function onJyNavDrawerLinkClick(target) {
   highLightNavItem("jy-id-drawer", ".jy-list-item.jy-temporary-drawer--selected", "jy-temporary-drawer--selected", target);
   highLightNavItem("jy-id-head-navigation", ".jy-c-navigation__link__selected", "jy-c-navigation__link__selected", target);
 
-  switch(target) {
+  switch(target.id.split('-').slice(-1).pop()) {
     case "blogs":
       require.ensure([], function(require){
         require("../templates/blogs").renderBlogs();
