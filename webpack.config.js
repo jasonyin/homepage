@@ -20,12 +20,12 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// Used with webpack-dev-server
-const PUBLIC_PATH = '';
 const IS_DEV = process.env.jy_ENV === 'development';
 const IS_PROD = process.env.jy_ENV === 'production';
 
-const OUT_PATH = IS_PROD ? path.resolve('./app/public') : path.resolve('./build');
+const PUBLIC_PATH = IS_DEV ? '/assets/' : "https://jasonyin.github.io/homepage/assets/";
+
+const OUT_PATH = IS_PROD ? path.resolve('./assets/') : path.resolve('./build');
 
 const createBannerPlugin = () => new webpack.BannerPlugin([
   '/*!',
@@ -42,15 +42,14 @@ module.exports = [
 {
   name: 'jy-homepage',
   entry: {
-    main: [
-      path.resolve('./app/scripts/main.js')],
+    main: [path.resolve('./app/scripts/main.js')]
   },
   output: {
     path: OUT_PATH,
     publicPath: PUBLIC_PATH,
-    filename: 'jy.main.js',
+    filename: 'jy.' + '[name]' + '.js',
     libraryTarget: 'umd',
-    library: ['jy', 'main'],
+    library: ['jy', '[name]'],
   },
   devtool: IS_DEV ? 'source-map' : null,
   module: {
@@ -63,48 +62,24 @@ module.exports = [
       loader: 'json-loader',
     }, {
       test: /\.hbs$/,
-      loader: 'handlebars-loader',
+      loader: 'handlebars-template-loader'
+    }, {
+      test: /\.htm$/,
+      loader: 'html-loader',
       query: {
-        partialDirs: [
-          path.resolve('app/templates/partials/'),
-          path.resolve('app/templates/partials/head/')
-        ]
+        minimize: true
       }
     }],
   },
+  node: {
+    fs: "empty" // avoids handlebars-template-loader error
+  },
   plugins: [
     createBannerPlugin(),
-    /*new webpack.optimize.CommonsChunkPlugin({}),*/
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      inject: false,
-      template: 'app/templates/pages/home.hbs',
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'about.html',
-      inject: false,
-      template: 'app/templates/pages/about.hbs',
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'blogs.html',
-      inject: false,
-      template: 'app/templates/pages/blogs.hbs',
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'contact.html',
-      inject: false,
-      template: 'app/templates/pages/contact.hbs',
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'webperf.html',
-      inject: false,
-      template: 'app/templates/pages/webperf.hbs',
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'webdev.html',
-      inject: false,
-      template: 'app/templates/pages/webdev.hbs',
-    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'main',
+      chuks: ['main', 'blogs']
+    })
   ],
 }, {
   name: 'style-ui-components-all',

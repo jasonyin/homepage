@@ -12,15 +12,3 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import * as nav from "./nav";
-import { renderHome } from "../templates/home";
-
-import * as ui from "../ui-components/all/index"
-
-export {
-  nav,
-  ui,
-  renderHome
-};
-
-renderHome();

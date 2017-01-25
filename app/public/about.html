@@ -22,63 +22,63 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JasonYin Tech</title>
-
+    
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-
+    
     <!-- Web Application Manifest -->
     <link rel="manifest" href="manifest.json">
-
+    
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Web Starter Kit">
     <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
-
+    
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
     <link rel="apple-touch-icon" href="../../images/touch/apple-touch-icon.png">
-
+    
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="../../images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#2F3BA2">
-
+    
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#2F3BA2">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="./jy.main.css">
+    <link rel="preload" href="./">
+    <link rel="preload" href="./about.html">
   </head>
   <body class="jy-typography jy-c-body">
     <div class="jy-c-header jy-theme--primary-bg jy-theme--text-primary-on-primary jy-typography--subheading jy-elevation--z4">
-      <button class="jy-c-menu material-icons">menu</button>
-      <div class="jy-c-flex-spacer-brand"></div>
-      <div class="jy-c-brand">
-        <div class="jy-c-brand-icon">
-          <i class="material-icons" aria-hidden="true">web</i>
-        </div>
-        <div class="jy-typography--subheading">JasonYin.Tech</div>
+    <button class="jy-c-menu material-icons">menu</button>
+    <div class="jy-c-flex-spacer-brand"></div>
+    <div class="jy-c-brand">
+      <div class="jy-c-brand-icon">
+        <i class="material-icons" aria-hidden="true">school</i>
       </div>
-      <div class="jy-c-flex-spacer"></div>
-      <div class="jy-c-navigation-container">
-        <nav class="jy-c-navigation">
-          <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./index.html">Home</a>
-          <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Blogs</a>
-          <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Web</a>
-          <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Performance</a>
-          <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./about.html">About</a>
-          <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="#">Contact</a>
-        </nav>
-      </div>
-      <div class="jy-c-search-box">
-        <i class="material-icons">search</i>
-      </div>
-      <div class="jy-c-more-button">
-        <i class="material-icons">more_vert</i>
-      </div>
+      <div class="jy-typography--subheading">JasonYin.Tech</div>
     </div>
-    <aside class="jy-temporary-drawer">
+    <div class="jy-c-flex-spacer"></div>
+    <div class="jy-c-navigation-container">
+      <nav id="jy-id-head-navigation" class="jy-c-navigation">
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./index.html">Home</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./blogs.html">Blogs</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./webdev.html">Web</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./webperf.html">Performance</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./about.html">About</a>
+        <a class="jy-c-navigation__link jy-theme--text-primary-on-primary" href="./contact.html">Contact</a>
+      </nav>
+    </div>
+    <div class="jy-c-search-box">
+      <i class="material-icons">search</i>
+    </div>
+    <div class="jy-c-more-button">
+      <i class="material-icons">more_vert</i>
+    </div>
+    </div>    <aside class="jy-temporary-drawer">
       <nav class="jy-temporary-drawer__drawer">
         <header class="jy-temporary-drawer__header">
           <div class="jy-temporary-drawer__header-content jy-theme--primary-bg jy-theme--text-primary-on-primary">
@@ -86,26 +86,26 @@
               JasonYin.Tech
           </div>
         </header>
-        <nav class="jy-temporary-drawer__content jy-list-group">
-          <div id="icon-with-text-jy" class="jy-list">
+        <nav id="jy-id-drawer" class="jy-temporary-drawer__content jy-list-group">
+          <div class="jy-list">
             <a class="jy-list-item jy-temporary-drawer--selected" href="./index.html">
               <i class="material-icons jy-list-item__start-detail" aria-hidden="true">home</i>Home
             </a>
-            <a class="jy-list-item" href="#">
+            <a class="jy-list-item" href="./blogs.html">
               <i class="material-icons jy-list-item__start-detail" aria-hidden="true">library_books</i>Blogs
             </a>
-            <a class="jy-list-item" href="#">
+            <a class="jy-list-item" href="./webdev.html">
               <i class="material-icons jy-list-item__start-detail" aria-hidden="true">language</i>Web Development
             </a>
-            <a class="jy-list-item" href="#">
+            <a class="jy-list-item" href="./webperf.html">
               <i class="material-icons jy-list-item__start-detail" aria-hidden="true">memory</i>Web Perf
             </a>
           </div>
-
+    
           <hr class="jy-list-divider">
-
+    
           <div class="jy-list">
-            <a class="jy-list-item" href="#">
+            <a class="jy-list-item" href="./contact.html">
               <i class="material-icons jy-list-item__start-detail" aria-hidden="true">contacts</i>Contact
             </a>
             <a class="jy-list-item" href="./about.html">
@@ -114,12 +114,16 @@
           </div>
         </nav>
       </nav>
-    </aside>
-    <main class="jy-main">  <p>b</p>    </main>
+    </aside>    <main class="jy-main">  <p>b</p>    </main>
     <script src="./jy.main.js"></script>
     <script>
-      let drawer = new jy.main.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
+      let drawer = new jy.main.ui.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
       document.querySelector('.jy-c-menu').addEventListener('click', () => drawer.open = true);
+
+      //import highLightNavItem from "";
+      // highlight the selected nav link based on window.location
+      jy.main.nav.highLightNavItem("jy-id-drawer", ".jy-list-item.jy-temporary-drawer--selected", "jy-temporary-drawer--selected");
+      jy.main.nav.highLightNavItem("jy-id-head-navigation", ".jy-c-navigation__link__selected", "jy-c-navigation__link__selected");
     </script>
   </body>
 </html>

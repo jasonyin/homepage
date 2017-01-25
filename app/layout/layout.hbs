@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="">
+<head>
+  @include('header-meta.htm')
+
+  @include('header-links.htm')
+
+  @include('header-preload.htm')
+</head>
+<body class="jy-typography jy-c-body">
+  <div class="jy-c-header jy-theme--primary-bg jy-theme--text-primary-on-primary jy-typography--subheading jy-elevation--z4">
+  @include('nav-header.htm')
+  @include('nav-drawer.htm')
+  <main id="jy-id-content" class="jy-main">
+    {{content}}
+  </main>
+  @include('footer.htm')

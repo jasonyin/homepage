@@ -1,0 +1,27 @@
+<!--
+    Copyright 2017 Jason Yin <jasonyin@outlook.com>
+ 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+ 
+        http://www.apache.org/licenses/LICENSE-2.0
+ 
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+  <script src="./jy.main.js"></script>
+  <script>
+    let drawer = new jy.main.ui.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
+    document.querySelector('.jy-c-menu').addEventListener('click', () => drawer.open = true);
+
+    //import highLightNavItem from "";
+    // highlight the selected nav link based on window.location
+    jy.main.nav.highLightNavItem("jy-id-drawer", ".jy-list-item.jy-temporary-drawer--selected", "jy-temporary-drawer--selected");
+    jy.main.nav.highLightNavItem("jy-id-head-navigation", ".jy-c-navigation__link__selected", "jy-c-navigation__link__selected");
+  </script>
+</body>
+</html>
