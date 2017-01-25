@@ -20,10 +20,10 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// Used with webpack-dev-server
-const PUBLIC_PATH = '/assets/';
 const IS_DEV = process.env.jy_ENV === 'development';
 const IS_PROD = process.env.jy_ENV === 'production';
+
+const PUBLIC_PATH = IS_DEV ? '/assets/' : "https://jasonyin.github.io/homepage/assets/";
 
 const OUT_PATH = IS_PROD ? path.resolve('./assets/') : path.resolve('./build');
 
