@@ -21,6 +21,10 @@ function highLightNavItem(containerId, selectedElementSelector, highLightCssClas
   }
 
   target.classList.add(highLightCssClass);
+
+  if (drawer && drawer.open) {
+    drawer.open = !drawer.open;
+  }
 };
 
 export function onJyNavDrawerLinkClick(target) {
