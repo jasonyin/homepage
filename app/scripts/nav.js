@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-export function highLightNavItem(containerId, selectedElementSelector, highLightCssClass) {
+function highLightNavItem(containerId, selectedElementSelector, highLightCssClass, target) {
   let containerElement = document.getElementById(containerId);
   let selectedElement = containerElement.querySelector(selectedElementSelector);
 
@@ -21,8 +21,28 @@ export function highLightNavItem(containerId, selectedElementSelector, highLight
   }
 
   containerElement.querySelectorAll("a").forEach((link) => {
-    if (link.href.indexOf(window.location.pathname) != -1) {
+    if (link == target) {
       link.classList.add(highLightCssClass);
     }
   });
 };
+
+export function onJyNavDrawerLinkClick(target) {
+  // highlight the selected nav link
+  highLightNavItem("jy-id-drawer", ".jy-list-item.jy-temporary-drawer--selected", "jy-temporary-drawer--selected", target);
+  highLightNavItem("jy-id-head-navigation", ".jy-c-navigation__link__selected", "jy-c-navigation__link__selected", target);
+
+  switch(target) {
+    case "blogs":
+      require.ensure([], function(require){
+        require("../templates/blogs").renderBlogs();
+      });
+      break;
+
+    default:
+      jy.main.renderHome();
+      break;
+  }
+
+  return true;
+}

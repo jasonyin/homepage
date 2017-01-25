@@ -46,7 +46,8 @@
     "eslint-plugin-tape": "^1.1.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "glob": "^7.1.1",
-    "html-webpack-plugin": "^2.26.0",
+    "handlebars": "^4.0.6",
+    "handlebars-template-loader": "^0.7.0",
     "json-loader": "^0.5.4",
     "mkdirp": "^0.5.1",
     "node-sass": "^3.7.0",
@@ -72,8 +73,6 @@
     "extends": "google"
   },
   "dependencies": {
-    "handlebars": "^4.0.6",
-    "handlebars-loader": "^1.4.0",
     "stylelint-scss": "^1.4.1"
   }
 }

@@ -12,15 +12,9 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import * as nav from "./nav";
-import { renderHome } from "../templates/home";
+var content = require("./home.hbs");
 
-import * as ui from "../ui-components/all/index"
-
-export {
-  nav,
-  ui,
-  renderHome
-};
-
-renderHome();
+export function renderHome() {
+  let compiledTemplate = content({name: "home"});
+  document.getElementById("jy-id-content").innerHTML = compiledTemplate;
+}
