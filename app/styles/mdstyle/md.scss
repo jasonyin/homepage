@@ -43,13 +43,11 @@
   p {
     @include jy-typography(body1);
     @include jy-typography-adjust-margin(body1);
-    font-size: 16px;
   }
 
   pre {
     @extend .jy-c-md-blocks;
     code {
-      font-size: 16px;
       background-color: #f7f7f7;
       color: black;
     }
