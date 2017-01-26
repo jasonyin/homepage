@@ -7,7 +7,7 @@
   "scripts": {
     "build": "mkdirp build && webpack --display-error-details --progress --colors",
     "build:min": "mkdirp build && cross-env jy_ENV=production webpack -p --progress --colors",
-    "release": "del-cli app/public/** && cross-env jy_ENV=production webpack -p --progress --colors",
+    "release": "del-cli assets/** && cross-env jy_ENV=production webpack -p --progress --colors",
     "clean": "del-cli build/**",
     "dist": "npm run clean && npm run build && npm run build:min",
     "dev": "npm run clean && cross-env jy_ENV=development webpack-dev-server -d --content-base ./ --inline --quiet --hot --host localhost",
