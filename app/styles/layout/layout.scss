@@ -36,7 +36,7 @@
       width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
   .jy-c-navigation-container {
     display: none;
   }
@@ -121,8 +121,7 @@
   font-size: 12px;
   line-height: 1.5;
   color: #767676;
-  border-top: 1px solid #eee;
-  width: 1024px;
+  max-width: 1024px;
   margin: 0px auto;
   ul {
     margin: 0;
