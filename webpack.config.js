@@ -68,7 +68,10 @@ module.exports = [
       loader: 'html-loader',
       query: {
         minimize: true
-      }
+      },
+    }, {
+      test: /\.md$/,
+      loader: "raw-loader"
     }],
   },
   node: {

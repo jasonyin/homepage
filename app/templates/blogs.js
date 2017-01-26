@@ -13,8 +13,14 @@
 //    limitations under the License.
 
 var content = require("./blogs.hbs");
+var mdfile = require("../posts/GroupAnagrams.md");
+var result = require('markdown-it')().render(mdfile);
 
 export function renderBlogs() {
-  let compiledTemplate = content({name: "blogs"});
-  document.getElementById("jy-id-content").innerHTML = compiledTemplate;
+  let compiledTemplate = content({content: result});
+  let container = document.getElementById("jy-id-content");
+  container.innerHTML = compiledTemplate;
+  container.querySelectorAll("pre code").forEach((block) => {
+    hljs.highlightBlock(block);
+  });
 }

@@ -12,6 +12,8 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+@import '../../ui-components/theme/_variables';
+
 .jy-c-header {
   width: 100%;
   height: 56px;
@@ -109,4 +111,38 @@
 
 .jy-c-more-button {
   display: none;
+}
+
+.jy-c-footer {
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #767676;
+  border-top: 1px solid #eee;
+  width: 1024px;
+  margin: 0px auto;
+  ul {
+    margin: 0;
+    list-style: none;
+    li {
+      margin-left: 12px;
+      display: inline-block;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: $jy-theme-primary;
+  }
+}
+
+@media (max-width: 480px) {
+  .jy-c-footer {
+    padding: 10px;
+    ul {
+      padding: 0;
+    }
+  }
 }

@@ -82,6 +82,18 @@
     <i class="material-icons">more_vert</i>
   </div>
   </div>
+  <main class="jy-c-main">
+    <div id="jy-id-content"></div>
+    <footer class="jy-c-footer">
+      <ul>
+        <li>© 2017 <span>JasonYin</span>.Tech</li>
+          <li><a href="https://github.com/jasonyin/homepage/blob/master/LICENSE">Terms</a></li>
+          <li><a href="https://github.com/jasonyin/homepage#readme">HomePage</a></li>
+          <li><a href="https://github.com/jasonyin/homepage/issues">Feedback</a></li>
+          <li><a href="https://github.com/jasonyin/homepage#readme">Help</a></li>
+      </ul>
+    </footer>
+  </main>
   <aside class="jy-temporary-drawer">
     <nav class="jy-temporary-drawer__drawer">
       <header class="jy-temporary-drawer__header">
@@ -119,10 +131,8 @@
       </nav>
     </nav>
   </aside>
-  <main id="jy-id-content" class="jy-main">
-    
-  </main>
   <script src="../assets/jy.main.js"></script>
+  <script async src="./scripts/highlightjs.js"></script>
   <script>
     let drawer = new jy.main.ui.drawer.JYTemporaryDrawer(document.querySelector('.jy-temporary-drawer'));
     document.querySelector('.jy-c-menu').addEventListener('click', () => drawer.open = true);
