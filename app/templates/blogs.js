@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 var content = require("./blogs.hbs");
-var mdfile = require("../posts/GroupAnagrams.md");
+var mdfile = require("../posts/web/Redux.md");
 var result = require('markdown-it')().render(mdfile);
 
 export function renderBlogs() {
